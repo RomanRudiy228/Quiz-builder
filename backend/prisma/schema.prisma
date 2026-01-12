@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+seed {
+  provider = "ts-node"
+  require = ["ts-node/register"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Quiz {
+  id        String     @id @default(uuid())
+  title     String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  questions Question[]
+}
+
+model Question {
+  id          String   @id @default(uuid())
+  quizId      String
+  quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  type        String   // "boolean", "input", "checkbox"
+  text        String
+  correctAnswer String // JSON string for checkbox (array), string for input, "true"/"false" for boolean
+  options     String?  // JSON string for checkbox options
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
