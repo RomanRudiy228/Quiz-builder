@@ -1,9 +1,4 @@
-export class CreateQuestionDto {
-  type: 'boolean' | 'input' | 'checkbox';
-  text: string;
-  correctAnswer: string; // JSON string for checkbox, string for input, "true"/"false" for boolean
-  options?: string; // JSON string for checkbox options array
-}
+import { CreateQuestionDto } from './create-question.dto';
 
 export class CreateQuizDto {
   title: string;
