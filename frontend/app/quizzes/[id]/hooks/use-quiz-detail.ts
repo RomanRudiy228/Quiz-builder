@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { quizApi, Quiz } from '@/services/quizzes.service';
+import { quizKeys } from '@/shared/query-keys/query-keys';
 
 export function useQuizDetail(id: string | undefined) {
   const {
@@ -11,7 +12,7 @@ export function useQuizDetail(id: string | undefined) {
     isLoading: loading,
     error,
   } = useQuery<Quiz>({
-    queryKey: ['quiz', id],
+    queryKey: quizKeys.detail(id!),
     queryFn: () => {
       if (!id) throw new Error('Quiz ID is required');
       return quizApi.getById(id);

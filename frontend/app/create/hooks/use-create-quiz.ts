@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { quizApi, Question } from '@/services/quizzes.service';
 import { CreateQuizFormData } from '../schemas/quiz.schema';
+import { quizKeys } from '@/shared/query-keys/query-keys';
 
 export function useCreateQuiz() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export function useCreateQuiz() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+      queryClient.invalidateQueries({ queryKey: quizKeys.all });
       toast.success('Quiz created successfully!');
       router.push('/quizzes');
     },

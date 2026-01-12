@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { quizApi, Quiz } from '@/services/quizzes.service';
+import { quizKeys } from '@/shared/query-keys/query-keys';
 
 export function useQuizzesList() {
   const queryClient = useQueryClient();
@@ -13,7 +14,7 @@ export function useQuizzesList() {
     isLoading: loading,
     error,
   } = useQuery<Quiz[]>({
-    queryKey: ['quizzes'],
+    queryKey: quizKeys.list(),
     queryFn: () => quizApi.getAll(),
   });
 
@@ -26,7 +27,7 @@ export function useQuizzesList() {
   const deleteMutation = useMutation({
     mutationFn: (id: string) => quizApi.delete(id),
     onSuccess: (_, id) => {
-      queryClient.setQueryData<Quiz[]>(['quizzes'], (old) =>
+      queryClient.setQueryData<Quiz[]>(quizKeys.list(), (old) =>
         old ? old.filter((q) => q.id !== id) : [],
       );
       toast.success('Quiz deleted successfully!');
