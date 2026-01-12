@@ -1,9 +1,6 @@
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-lg shadow-xl p-8 text-center">

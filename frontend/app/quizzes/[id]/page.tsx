@@ -1,16 +1,19 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { quizApi, Quiz } from '@/services/quizzes.service';
+import LoadingSpinner from '@/components/loading-state/loading-state';
 
 export default function QuizDetail() {
-  const router = useRouter();
-  const { id } = router.query;
+  const params = useParams();
+  const id = params.id as string;
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (id && typeof id === 'string') {
+    if (id) {
       loadQuiz(id);
     }
   }, [id]);
@@ -28,11 +31,7 @@ export default function QuizDetail() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-xl text-gray-600">Loading quiz...</div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading quiz..." />;
   }
 
   if (!quiz) {
