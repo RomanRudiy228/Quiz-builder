@@ -1,10 +1,10 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import LoadingSpinner from '@/components/loading-state/loading-state';
 import EmptyState from '@/components/empty-state/empty-state';
 import { useQuizDetail } from './hooks/use-quiz-detail';
+import BackLink from '@/shared/ui/back-link/back-link';
 
 export default function QuizDetail() {
   const params = useParams();
@@ -33,9 +33,7 @@ export default function QuizDetail() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <Link href="/quizzes" className="text-indigo-600 hover:text-indigo-800 font-medium">
-            ← Back to Quizzes
-          </Link>
+          <BackLink href="/quizzes">← Back to Quizzes</BackLink>
         </div>
 
         <div className="bg-white rounded-lg shadow-xl p-8">

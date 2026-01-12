@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import LinkButton from '@/shared/ui/link-button/link-button';
 
 export default function Home() {
   return (
@@ -7,18 +7,12 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Quiz Builder</h1>
         <p className="text-gray-600 mb-8">Create and manage your custom quizzes</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/create"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200"
-          >
+          <LinkButton href="/create" variant="primary" size="lg">
             Create Quiz
-          </Link>
-          <Link
-            href="/quizzes"
-            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200"
-          >
+          </LinkButton>
+          <LinkButton href="/quizzes" variant="secondary" size="lg">
             View All Quizzes
-          </Link>
+          </LinkButton>
         </div>
       </div>
     </div>
