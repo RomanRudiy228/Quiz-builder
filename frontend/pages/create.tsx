@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm, useFieldArray, useWatch } from 'react-hook-form';
-import { quizApi, Question } from '@/services/api';
+import { quizApi, Question } from '@/services/quizzes.service';
 import Link from 'next/link';
 
 type FormData = {
@@ -93,10 +93,7 @@ export default function CreateQuiz() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <Link
-            href="/"
-            className="text-indigo-600 hover:text-indigo-800 font-medium"
-          >
+          <Link href="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
             ← Back to Home
           </Link>
         </div>
@@ -106,10 +103,7 @@ export default function CreateQuiz() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-              <label
-                htmlFor="title"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                 Quiz Title
               </label>
               <input
@@ -119,9 +113,7 @@ export default function CreateQuiz() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="Enter quiz title"
               />
-              {errors.title && (
-                <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
-              )}
+              {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>}
             </div>
 
             <div>
@@ -176,14 +168,12 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
     control,
     name: `questions.${index}`,
   });
-  
+
   const type = question?.type || 'boolean';
   const [checkboxOptions, setCheckboxOptions] = useState<string[]>(
-    question?.checkboxOptions || ['', '']
+    question?.checkboxOptions || ['', ''],
   );
-  const [checkboxAnswers, setCheckboxAnswers] = useState<string[]>(
-    question?.checkboxAnswers || []
-  );
+  const [checkboxAnswers, setCheckboxAnswers] = useState<string[]>(question?.checkboxAnswers || []);
 
   const handleTypeChange = (newType: string) => {
     setValue(`questions.${index}.type`, newType);
@@ -212,9 +202,7 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Question Type
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Question Type</label>
           <select
             {...register(`questions.${index}.type`)}
             value={type}
@@ -228,9 +216,7 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Question Text
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Question Text</label>
           <textarea
             {...register(`questions.${index}.text`, {
               required: 'Question text is required',
@@ -240,17 +226,13 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
             placeholder="Enter your question"
           />
           {errors.questions?.[index]?.text && (
-            <p className="mt-1 text-sm text-red-600">
-              {errors.questions[index].text?.message}
-            </p>
+            <p className="mt-1 text-sm text-red-600">{errors.questions[index].text?.message}</p>
           )}
         </div>
 
         {type === 'boolean' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Correct Answer
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
             <div className="flex gap-4">
               <label className="flex items-center">
                 <input
@@ -277,9 +259,7 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
 
         {type === 'input' && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Correct Answer
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
             <input
               {...register(`questions.${index}.inputAnswer`, {
                 required: 'Correct answer is required',
@@ -299,9 +279,7 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
         {type === 'checkbox' && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Options
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Options</label>
               {checkboxOptions.map((opt, optIndex) => (
                 <div key={optIndex} className="flex gap-2 mb-2">
                   <input
@@ -368,4 +346,3 @@ function QuestionForm({ index, register, control, remove, errors, setValue }: an
     </div>
   );
 }
-

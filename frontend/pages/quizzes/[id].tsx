@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { quizApi, Quiz } from '@/services/api';
+import { quizApi, Quiz } from '@/services/quizzes.service';
 
 export default function QuizDetail() {
   const router = useRouter();
@@ -40,10 +40,7 @@ export default function QuizDetail() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl text-gray-600 mb-4">Quiz not found</p>
-          <Link
-            href="/quizzes"
-            className="text-indigo-600 hover:text-indigo-800 font-medium"
-          >
+          <Link href="/quizzes" className="text-indigo-600 hover:text-indigo-800 font-medium">
             ← Back to Quizzes
           </Link>
         </div>
@@ -55,10 +52,7 @@ export default function QuizDetail() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <Link
-            href="/quizzes"
-            className="text-indigo-600 hover:text-indigo-800 font-medium"
-          >
+          <Link href="/quizzes" className="text-indigo-600 hover:text-indigo-800 font-medium">
             ← Back to Quizzes
           </Link>
         </div>
@@ -72,14 +66,9 @@ export default function QuizDetail() {
 
           <div className="space-y-6">
             {quiz.questions?.map((question, index) => (
-              <div
-                key={index}
-                className="border border-gray-200 rounded-lg p-6 bg-gray-50"
-              >
+              <div key={index} className="border border-gray-200 rounded-lg p-6 bg-gray-50">
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    Question {index + 1}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-800">Question {index + 1}</h3>
                   <span className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">
                     {question.type}
                   </span>
@@ -112,9 +101,7 @@ export default function QuizDetail() {
                           <li key={i} className="text-gray-800">
                             {opt}
                             {JSON.parse(question.correctAnswer).includes(opt) && (
-                              <span className="ml-2 text-green-600 font-medium">
-                                ✓ (correct)
-                              </span>
+                              <span className="ml-2 text-green-600 font-medium">✓ (correct)</span>
                             )}
                           </li>
                         ))}
@@ -133,4 +120,3 @@ export default function QuizDetail() {
     </div>
   );
 }
-

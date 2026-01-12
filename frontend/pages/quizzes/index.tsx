@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { quizApi, Quiz } from '@/services/api';
+import { quizApi, Quiz } from '@/services/quizzes.service';
 
 export default function QuizzesList() {
   const router = useRouter();
@@ -54,10 +54,7 @@ export default function QuizzesList() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-6 flex justify-between items-center">
-          <Link
-            href="/"
-            className="text-indigo-600 hover:text-indigo-800 font-medium"
-          >
+          <Link href="/" className="text-indigo-600 hover:text-indigo-800 font-medium">
             ← Back to Home
           </Link>
           <Link
@@ -74,10 +71,7 @@ export default function QuizzesList() {
           {quizzes.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-600 text-lg mb-4">No quizzes found.</p>
-              <Link
-                href="/create"
-                className="text-indigo-600 hover:text-indigo-800 font-medium"
-              >
+              <Link href="/create" className="text-indigo-600 hover:text-indigo-800 font-medium">
                 Create your first quiz →
               </Link>
             </div>
@@ -89,9 +83,7 @@ export default function QuizzesList() {
                   className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition duration-200 bg-white"
                 >
                   <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-xl font-semibold text-gray-800 flex-1">
-                      {quiz.title}
-                    </h2>
+                    <h2 className="text-xl font-semibold text-gray-800 flex-1">{quiz.title}</h2>
                     <button
                       onClick={() => handleDelete(quiz.id)}
                       disabled={deletingId === quiz.id}
@@ -120,4 +112,3 @@ export default function QuizzesList() {
     </div>
   );
 }
-
