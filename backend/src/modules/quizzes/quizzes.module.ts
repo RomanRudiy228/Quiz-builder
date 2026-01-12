@@ -7,4 +7,3 @@ import { QuizzesController } from './quizzes.controller';
   providers: [QuizzesService],
 })
 export class QuizzesModule {}
-

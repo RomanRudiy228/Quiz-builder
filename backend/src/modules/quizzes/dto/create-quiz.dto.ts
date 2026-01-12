@@ -9,4 +9,3 @@ export class CreateQuizDto {
   title: string;
   questions: CreateQuestionDto[];
 }
-

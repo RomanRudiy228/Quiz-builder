@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateQuizDto } from './dto/create-quiz.dto';
 
 @Injectable()
@@ -80,4 +80,3 @@ export class QuizzesService {
     return { message: 'Quiz deleted successfully' };
   }
 }
-

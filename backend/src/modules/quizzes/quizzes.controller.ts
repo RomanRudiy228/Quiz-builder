@@ -42,4 +42,3 @@ export class QuizzesController {
     return this.quizzesService.remove(id);
   }
 }
-
