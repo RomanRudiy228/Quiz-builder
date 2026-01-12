@@ -1,48 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { quizApi, Quiz } from '@/services/quizzes.service';
 import LoadingSpinner from '@/components/loading-state/loading-state';
-import QuizCard from '@/components/quizzes/quiz-card';
+import QuizCard from '@/components/quiz-card/quiz-card';
+import EmptyState from '@/components/empty-state/empty-state';
+import { useQuizzesList } from './hooks/use-quizzes-list';
 
 export default function QuizzesList() {
-  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
-
-  useEffect(() => {
-    loadQuizzes();
-  }, []);
-
-  const loadQuizzes = async () => {
-    try {
-      const data = await quizApi.getAll();
-      setQuizzes(data);
-    } catch (error) {
-      console.error('Error loading quizzes:', error);
-      alert('Failed to load quizzes. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this quiz?')) {
-      return;
-    }
-
-    setDeletingId(id);
-    try {
-      await quizApi.delete(id);
-      setQuizzes(quizzes.filter((q) => q.id !== id));
-    } catch (error) {
-      console.error('Error deleting quiz:', error);
-      alert('Failed to delete quiz. Please try again.');
-    } finally {
-      setDeletingId(null);
-    }
-  };
+  const { quizzes, loading, deletingId, handleDelete } = useQuizzesList();
 
   if (loading) {
     return <LoadingSpinner message="Loading quizzes..." />;
@@ -67,12 +32,11 @@ export default function QuizzesList() {
           <h1 className="text-3xl font-bold text-gray-800 mb-6">All Quizzes</h1>
 
           {quizzes.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-600 text-lg mb-4">No quizzes found.</p>
-              <Link href="/create" className="text-indigo-600 hover:text-indigo-800 font-medium">
-                Create your first quiz →
-              </Link>
-            </div>
+            <EmptyState
+              message="No quizzes found."
+              actionText="Create your first quiz →"
+              actionHref="/create"
+            />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {quizzes.map((quiz) => (

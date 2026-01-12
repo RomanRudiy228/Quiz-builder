@@ -1,34 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { quizApi, Quiz } from '@/services/quizzes.service';
 import LoadingSpinner from '@/components/loading-state/loading-state';
+import EmptyState from '@/components/empty-state/empty-state';
+import { useQuizDetail } from './hooks/use-quiz-detail';
 
 export default function QuizDetail() {
   const params = useParams();
   const id = params.id as string;
-  const [quiz, setQuiz] = useState<Quiz | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (id) {
-      loadQuiz(id);
-    }
-  }, [id]);
-
-  const loadQuiz = async (quizId: string) => {
-    try {
-      const data = await quizApi.getById(quizId);
-      setQuiz(data);
-    } catch (error) {
-      console.error('Error loading quiz:', error);
-      alert('Failed to load quiz. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { quiz, loading } = useQuizDetail(id);
 
   if (loading) {
     return <LoadingSpinner message="Loading quiz..." />;
@@ -36,12 +17,13 @@ export default function QuizDetail() {
 
   if (!quiz) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-xl text-gray-600 mb-4">Quiz not found</p>
-          <Link href="/quizzes" className="text-indigo-600 hover:text-indigo-800 font-medium">
-            ← Back to Quizzes
-          </Link>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <EmptyState
+            message="Quiz not found"
+            actionText="← Back to Quizzes"
+            actionHref="/quizzes"
+          />
         </div>
       </div>
     );

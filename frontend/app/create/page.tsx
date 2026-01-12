@@ -1,34 +1,22 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { quizApi, Question } from '@/services/quizzes.service';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import QuestionForm from '@/components/forms/QuestionForm';
-
-type FormData = {
-  title: string;
-  questions: Array<{
-    type: 'boolean' | 'input' | 'checkbox';
-    text: string;
-    correctAnswer?: string;
-    inputAnswer?: string;
-    checkboxOptions?: string[];
-    checkboxAnswers?: string[];
-  }>;
-};
+import QuestionForm from '@/components/question-form/question-form';
+import { createQuizSchema, type CreateQuizFormData } from './schemas/quiz.schema';
+import { useCreateQuiz } from './hooks/use-create-quiz';
 
 export default function CreateQuiz() {
-  const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { createQuiz, isSubmitting } = useCreateQuiz();
   const {
     register,
     control,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<CreateQuizFormData>({
+    resolver: zodResolver(createQuizSchema),
     defaultValues: {
       title: '',
       questions: [
@@ -45,44 +33,6 @@ export default function CreateQuiz() {
     control,
     name: 'questions',
   });
-
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    try {
-      // Format questions for API
-      const formattedQuestions: Question[] = data.questions.map((q) => {
-        const question: Question = {
-          type: q.type,
-          text: q.text,
-          correctAnswer: '',
-        };
-
-        if (q.type === 'boolean') {
-          question.correctAnswer = q.correctAnswer || 'true';
-        } else if (q.type === 'input') {
-          question.correctAnswer = q.inputAnswer || '';
-        } else if (q.type === 'checkbox') {
-          const selectedOptions = q.checkboxAnswers || [];
-          question.correctAnswer = JSON.stringify(selectedOptions);
-          question.options = JSON.stringify(q.checkboxOptions || []);
-        }
-
-        return question;
-      });
-
-      await quizApi.create({
-        title: data.title,
-        questions: formattedQuestions,
-      });
-
-      router.push('/quizzes');
-    } catch (error) {
-      console.error('Error creating quiz:', error);
-      alert('Failed to create quiz. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const addQuestion = () => {
     append({
@@ -104,13 +54,13 @@ export default function CreateQuiz() {
         <div className="bg-white rounded-lg shadow-xl p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Create New Quiz</h1>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(createQuiz)} className="space-y-6">
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                 Quiz Title
               </label>
               <input
-                {...register('title', { required: 'Title is required' })}
+                {...register('title')}
                 type="text"
                 id="title"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
