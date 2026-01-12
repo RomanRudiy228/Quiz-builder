@@ -43,4 +43,3 @@ lerna-debug.log*
 # Database files (if using SQLite)
 *.db
 *.db-journal
-
