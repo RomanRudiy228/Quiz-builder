@@ -13,32 +13,62 @@ Full-stack web application for creating and managing custom quizzes with various
 
 ### Frontend
 
-- **Next.js** 14 with **React**
+- **Next.js** 14 with **React** (App Router)
 - **TypeScript**
 - **Tailwind CSS** for styling
 - **React Hook Form** for form management
-- **Fetch API** for API calls
+- **Zod** for schema validation
+- **TanStack Query** (React Query) for data fetching
+- **React Hot Toast** for notifications
 
 ## Project Structure
 
 ```
 quiz-builder/
-├── backend/              # Nest.js backend API
+├── backend/                    # Nest.js backend API
 │   ├── src/
-│   │   ├── quizzes/     # Quiz module (controller, service, DTOs)
-│   │   ├── prisma/      # Prisma service and module
+│   │   ├── modules/
+│   │   │   └── quizzes/        # Quiz module
+│   │   │       ├── dto/        # Data Transfer Objects
+│   │   │       ├── quizzes.controller.ts
+│   │   │       ├── quizzes.service.ts
+│   │   │       └── quizzes.module.ts
+│   │   ├── prisma/             # Prisma service and module
 │   │   ├── app.module.ts
 │   │   └── main.ts
 │   ├── prisma/
-│   │   └── schema.prisma # Database schema
+│   │   ├── schema.prisma       # Database schema
+│   │   └── migrations/         # Database migrations
 │   └── package.json
-├── frontend/            # Next.js frontend
-│   ├── pages/
-│   │   ├── create.tsx   # Quiz creation page
-│   │   ├── quizzes/     # Quiz list and detail pages
-│   │   └── index.tsx    # Home page
-│   ├── services/
-│   │   └── api.ts       # API client
+├── frontend/                   # Next.js frontend (App Router)
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── create/             # Quiz creation page
+│   │   │   ├── hooks/          # Custom hooks
+│   │   │   ├── schemas/        # Zod validation schemas
+│   │   │   └── page.tsx
+│   │   ├── quizzes/            # Quiz pages
+│   │   │   ├── [id]/          # Dynamic quiz detail page
+│   │   │   └── page.tsx        # Quiz list page
+│   │   ├── layout.tsx          # Root layout
+│   │   └── page.tsx            # Home page
+│   ├── components/             # React components
+│   │   ├── question-form/      # Question form components
+│   │   ├── quiz-card/          # Quiz card component
+│   │   ├── empty-state/        # Empty state component
+│   │   ├── loading-state/      # Loading state component
+│   │   └── providers/          # Context providers
+│   ├── shared/                 # Shared utilities and UI
+│   │   ├── ui/                 # Reusable UI components
+│   │   │   ├── button/
+│   │   │   ├── link-button/
+│   │   │   └── back-link/
+│   │   └── query-keys/         # React Query keys
+│   ├── services/               # API services
+│   │   ├── quizzes.service.ts
+│   │   ├── types/
+│   │   └── utils/
+│   ├── styles/
+│   │   └── globals.css         # Global styles with Tailwind
 │   └── package.json
 └── README.md
 ```
@@ -226,6 +256,19 @@ Delete a quiz by ID.
 6. Select question types and provide correct answers
 7. Click "Create Quiz" to save
 
+## Validation
+
+The project uses different validation approaches for backend and frontend:
+
+- **Backend**: Uses `class-validator` with NestJS DTOs for request validation
+- **Frontend**: Uses **Zod** schemas with React Hook Form for form validation
+
+Zod schemas are located in `frontend/app/create/schemas/quiz.schema.ts` and provide:
+
+- Type-safe form validation
+- Custom validation rules for different question types
+- Automatic TypeScript type inference
+
 ## Code Quality
 
 ### Linting and Formatting
@@ -291,13 +334,14 @@ This will open Prisma Studio in your browser where you can view and edit data.
 
 ## Features
 
-- ✅ Create quizzes with multiple question types
+- ✅ Create quizzes with multiple question types (Boolean, Input, Checkbox)
 - ✅ View all quizzes in a dashboard
 - ✅ View individual quiz details
 - ✅ Delete quizzes
-- ✅ Responsive design
-- ✅ Form validation
+- ✅ Responsive design with Tailwind CSS
+- ✅ Form validation with Zod schemas
 - ✅ Type-safe API with TypeScript
+- ✅ Client-side state management with React Query
 
 ## License
 
