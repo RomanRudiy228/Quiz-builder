@@ -19,11 +19,7 @@ export default function QuizDetail() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
         <div className="max-w-4xl mx-auto">
-          <EmptyState
-            message="Quiz not found"
-            actionText="← Back to Quizzes"
-            actionHref="/quizzes"
-          />
+          <EmptyState message="Quiz not found" actionText="Back to Quizzes" actionHref="/quizzes" />
         </div>
       </div>
     );
@@ -33,7 +29,7 @@ export default function QuizDetail() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <BackLink href="/quizzes">← Back to Quizzes</BackLink>
+          <BackLink href="/quizzes">Back to Quizzes</BackLink>
         </div>
 
         <div className="bg-white rounded-lg shadow-xl p-8">

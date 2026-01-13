@@ -1,13 +1,13 @@
 import { InputAnswerFieldProps } from './types/input-answer-field.types';
+import Input from '@/shared/ui/input/input';
 
 export default function InputAnswerField({ index, register, errors }: InputAnswerFieldProps) {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
-      <input
-        {...register(`questions.${index}.inputAnswer`)}
-        type="text"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+      <Input
+        register={register}
+        name={`questions.${index}.inputAnswer`}
         placeholder="Enter the correct answer"
       />
       {Array.isArray(errors.questions) && errors.questions[index]?.inputAnswer && (

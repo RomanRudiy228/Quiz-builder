@@ -18,7 +18,7 @@ export default function QuizzesList() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-6 flex justify-between items-center">
-          <BackLink href="/">← Back to Home</BackLink>
+          <BackLink href="/">Back to Home</BackLink>
           <LinkButton href="/create" variant="primary">
             + Create New Quiz
           </LinkButton>
@@ -30,7 +30,7 @@ export default function QuizzesList() {
           {quizzes.length === 0 ? (
             <EmptyState
               message="No quizzes found."
-              actionText="Create your first quiz →"
+              actionText="Create your first quiz"
               actionHref="/create"
             />
           ) : (

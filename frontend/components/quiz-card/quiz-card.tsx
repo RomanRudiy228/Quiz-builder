@@ -2,6 +2,7 @@
 
 import LinkButton from '@/shared/ui/link-button/link-button';
 import Button from '@/shared/ui/button/button';
+import { FaTrash } from 'react-icons/fa';
 import { QuizCardProps } from './types/quiz-card.types';
 
 export default function QuizCard({ quiz, onDelete, isDeleting }: QuizCardProps) {
@@ -17,7 +18,7 @@ export default function QuizCard({ quiz, onDelete, isDeleting }: QuizCardProps) 
           className="ml-2"
           title="Delete quiz"
         >
-          {isDeleting ? '...' : '🗑️'}
+          {isDeleting ? '...' : <FaTrash className="text-red-500" />}
         </Button>
       </div>
       <p className="text-gray-600 mb-4">

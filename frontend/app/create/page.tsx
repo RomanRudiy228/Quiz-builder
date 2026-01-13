@@ -8,6 +8,7 @@ import { useCreateQuiz } from './hooks/use-create-quiz';
 import BackLink from '@/shared/ui/back-link/back-link';
 import Button from '@/shared/ui/button/button';
 import LinkButton from '@/shared/ui/link-button/link-button';
+import Input from '@/shared/ui/input/input';
 
 export default function CreateQuiz() {
   const { createQuiz, isSubmitting } = useCreateQuiz();
@@ -48,7 +49,7 @@ export default function CreateQuiz() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <BackLink href="/">← Back to Home</BackLink>
+          <BackLink href="/">Back to Home</BackLink>
         </div>
 
         <div className="bg-white rounded-lg shadow-xl p-8">
@@ -59,13 +60,7 @@ export default function CreateQuiz() {
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                 Quiz Title
               </label>
-              <input
-                {...register('title')}
-                type="text"
-                id="title"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="Enter quiz title"
-              />
+              <Input id="title" register={register} name="title" placeholder="Enter quiz title" />
               {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>}
             </div>
 
@@ -90,20 +85,20 @@ export default function CreateQuiz() {
               ))}
             </div>
 
-            <div className="flex gap-4 pt-4">
+            <div className="flex justify-end gap-4 pt-4">
+              <LinkButton href="/quizzes" variant="secondary" size="lg">
+                Cancel
+              </LinkButton>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 isLoading={isSubmitting}
                 variant="primary"
                 size="lg"
-                className="flex-1"
+                className="min-w-[140px]"
               >
                 Create Quiz
               </Button>
-              <LinkButton href="/quizzes" variant="secondary" size="lg" fullWidth>
-                Cancel
-              </LinkButton>
             </div>
           </form>
         </div>

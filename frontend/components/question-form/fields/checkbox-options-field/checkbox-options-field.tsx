@@ -1,4 +1,5 @@
 import { CheckboxOptionsFieldProps } from './types/checkbox-options-field.types';
+import Input from '@/shared/ui/input/input';
 
 export default function CheckboxOptionsField({
   index,
@@ -30,12 +31,12 @@ export default function CheckboxOptionsField({
       <label className="block text-sm font-medium text-gray-700 mb-2">Options</label>
       {options.map((opt, optIndex) => (
         <div key={optIndex} className="flex gap-2 mb-2">
-          <input
+          <Input
             type="text"
             value={opt}
             onChange={(e) => updateOption(optIndex, e.target.value)}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
             placeholder={`Option ${optIndex + 1}`}
+            className="flex-1"
           />
           {options.length > 2 && (
             <button

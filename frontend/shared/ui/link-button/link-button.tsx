@@ -1,20 +1,6 @@
 import Link from 'next/link';
-import { ReactNode } from 'react';
-import {
-  ButtonVariants,
-  ButtonSizes,
-  buttonVariants,
-  buttonSizes,
-} from '../button/utils/button.utils';
-
-export interface LinkButtonProps {
-  href: string;
-  variant?: ButtonVariants;
-  size?: ButtonSizes;
-  children: ReactNode;
-  className?: string;
-  fullWidth?: boolean;
-}
+import { buttonVariants, buttonSizes } from '../button/utils/button.utils';
+import { LinkButtonProps } from './types/link-button.types';
 
 export default function LinkButton({
   href,
