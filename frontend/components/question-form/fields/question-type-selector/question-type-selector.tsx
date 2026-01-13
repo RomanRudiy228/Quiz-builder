@@ -16,9 +16,15 @@ export default function QuestionTypeSelector({
         value={value}
         onChange={(e) => onChange(e.target.value as 'boolean' | 'input' | 'checkbox')}
       >
-        <option value="boolean">True/False</option>
-        <option value="input">Short Text Answer</option>
-        <option value="checkbox">Multiple Choice (Checkbox)</option>
+        <option value="boolean" className="bg-white text-gray-900 py-2">
+          True/False
+        </option>
+        <option value="input" className="bg-white text-gray-900 py-2">
+          Short Text Answer
+        </option>
+        <option value="checkbox" className="bg-white text-gray-900 py-2">
+          Multiple Choice (Checkbox)
+        </option>
       </Select>
     </div>
   );
