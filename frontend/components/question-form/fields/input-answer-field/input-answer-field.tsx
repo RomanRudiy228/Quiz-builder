@@ -7,7 +7,7 @@ export default function InputAnswerField({ index, register, errors }: InputAnswe
       <input
         {...register(`questions.${index}.inputAnswer`)}
         type="text"
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
         placeholder="Enter the correct answer"
       />
       {Array.isArray(errors.questions) && errors.questions[index]?.inputAnswer && (

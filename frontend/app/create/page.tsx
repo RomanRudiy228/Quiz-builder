@@ -63,7 +63,7 @@ export default function CreateQuiz() {
                 {...register('title')}
                 type="text"
                 id="title"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
                 placeholder="Enter quiz title"
               />
               {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>}
@@ -90,20 +90,20 @@ export default function CreateQuiz() {
               ))}
             </div>
 
-            <div className="flex gap-4 pt-4">
+            <div className="flex justify-end gap-4 pt-4">
+              <LinkButton href="/quizzes" variant="secondary" size="lg">
+                Cancel
+              </LinkButton>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 isLoading={isSubmitting}
                 variant="primary"
                 size="lg"
-                className="flex-1"
+                className="min-w-[140px]"
               >
                 Create Quiz
               </Button>
-              <LinkButton href="/quizzes" variant="secondary" size="lg" fullWidth>
-                Cancel
-              </LinkButton>
             </div>
           </form>
         </div>

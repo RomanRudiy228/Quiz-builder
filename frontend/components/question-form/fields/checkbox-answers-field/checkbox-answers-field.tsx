@@ -24,7 +24,7 @@ export default function CheckboxAnswersField({
         Correct Answers (select all that apply)
       </label>
       {options.map((opt, optIndex) => (
-        <label key={optIndex} className="flex items-center mb-2">
+        <label key={optIndex} className="flex items-center mb-2 text-gray-900">
           <input
             type="checkbox"
             checked={answers.includes(opt)}

@@ -5,7 +5,7 @@ export default function BooleanAnswerField({ index, register }: BooleanAnswerFie
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-2">Correct Answer</label>
       <div className="flex gap-4">
-        <label className="flex items-center">
+        <label className="flex items-center text-gray-900">
           <input
             {...register(`questions.${index}.correctAnswer`)}
             type="radio"
@@ -15,7 +15,7 @@ export default function BooleanAnswerField({ index, register }: BooleanAnswerFie
           />
           True
         </label>
-        <label className="flex items-center">
+        <label className="flex items-center text-gray-900">
           <input
             {...register(`questions.${index}.correctAnswer`)}
             type="radio"

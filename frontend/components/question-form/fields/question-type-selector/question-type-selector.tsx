@@ -13,7 +13,7 @@ export default function QuestionTypeSelector({
         {...register(`questions.${index}.type`)}
         value={value}
         onChange={(e) => onChange(e.target.value as 'boolean' | 'input' | 'checkbox')}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
       >
         <option value="boolean">True/False</option>
         <option value="input">Short Text Answer</option>

@@ -34,7 +34,7 @@ export default function CheckboxOptionsField({
             type="text"
             value={opt}
             onChange={(e) => updateOption(optIndex, e.target.value)}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
             placeholder={`Option ${optIndex + 1}`}
           />
           {options.length > 2 && (
