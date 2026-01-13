@@ -48,7 +48,7 @@ export default function CreateQuiz() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <BackLink href="/">← Back to Home</BackLink>
+          <BackLink href="/">Back to Home</BackLink>
         </div>
 
         <div className="bg-white rounded-lg shadow-xl p-8">
