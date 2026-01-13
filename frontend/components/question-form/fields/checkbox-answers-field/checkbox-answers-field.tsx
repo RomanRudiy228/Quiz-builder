@@ -1,4 +1,5 @@
 import { CheckboxAnswersFieldProps } from './types/checkbox-answers-field.types';
+import Checkbox from '@/shared/ui/checkbox/checkbox';
 
 export default function CheckboxAnswersField({
   index,
@@ -24,15 +25,14 @@ export default function CheckboxAnswersField({
         Correct Answers (select all that apply)
       </label>
       {options.map((opt, optIndex) => (
-        <label key={optIndex} className="flex items-center mb-2 text-gray-900">
-          <input
-            type="checkbox"
-            checked={answers.includes(opt)}
-            onChange={(e) => handleAnswerChange(opt, e.target.checked)}
-            className="mr-2"
-          />
-          {opt || `Option ${optIndex + 1}`}
-        </label>
+        <Checkbox
+          key={optIndex}
+          checked={answers.includes(opt)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleAnswerChange(opt, e.target.checked)
+          }
+          label={opt || `Option ${optIndex + 1}`}
+        />
       ))}
     </div>
   );

@@ -1,4 +1,5 @@
 import { QuestionTypeSelectorProps } from './types/question-type-selector.types';
+import Select from '@/shared/ui/select/select';
 
 export default function QuestionTypeSelector({
   index,
@@ -9,16 +10,16 @@ export default function QuestionTypeSelector({
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-2">Question Type</label>
-      <select
-        {...register(`questions.${index}.type`)}
+      <Select
+        register={register}
+        name={`questions.${index}.type`}
         value={value}
         onChange={(e) => onChange(e.target.value as 'boolean' | 'input' | 'checkbox')}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
       >
         <option value="boolean">True/False</option>
         <option value="input">Short Text Answer</option>
         <option value="checkbox">Multiple Choice (Checkbox)</option>
-      </select>
+      </Select>
     </div>
   );
 }
