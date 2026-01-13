@@ -16,10 +16,12 @@ Full-stack web application for creating and managing custom quizzes with various
 - **Next.js** 14 with **React** (App Router)
 - **TypeScript**
 - **Tailwind CSS** for styling
+- **Inter** font (Google Fonts) for modern typography
 - **React Hook Form** for form management
 - **Zod** for schema validation
 - **TanStack Query** (React Query) for data fetching
 - **React Hot Toast** for notifications
+- **React Icons** for icon library
 
 ## Project Structure
 
@@ -59,9 +61,14 @@ quiz-builder/
 │   │   └── providers/          # Context providers
 │   ├── shared/                 # Shared utilities and UI
 │   │   ├── ui/                 # Reusable UI components
-│   │   │   ├── button/
-│   │   │   ├── link-button/
-│   │   │   └── back-link/
+│   │   │   ├── button/         # Button component
+│   │   │   ├── link-button/    # Link button component
+│   │   │   ├── back-link/      # Back navigation link
+│   │   │   ├── input/          # Text input component
+│   │   │   ├── textarea/       # Textarea component
+│   │   │   ├── select/         # Custom dropdown select
+│   │   │   ├── radio/          # Radio button component
+│   │   │   └── checkbox/       # Checkbox component
 │   │   └── query-keys/         # React Query keys
 │   ├── services/               # API services
 │   │   ├── quizzes.service.ts
@@ -342,6 +349,8 @@ This will open Prisma Studio in your browser where you can view and edit data.
 - ✅ Form validation with Zod schemas
 - ✅ Type-safe API with TypeScript
 - ✅ Client-side state management with React Query
+- ✅ Reusable UI components
+- ✅ Modern typography with Inter font
 
 ## License
 
